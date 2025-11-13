@@ -5,5 +5,11 @@ return {
     opts = {
       -- add any custom options here
     }
+  },
+  {
+    "j-hui/fidget.nvim",
+    opts = {
+      -- options
+    },
   }
 }

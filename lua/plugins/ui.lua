@@ -14,20 +14,26 @@ return {
   },
   {
     "folke/which-key.nvim",
+    dependencies = {
+      "nvim-mini/mini.icons",
+      "nvim-tree/nvim-web-devicons"
+    },
     event = "VeryLazy",
+    ---@module 'which-key'
+    ---@type wk.Opts
     opts = {
       -- your configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
+      preset = 'modern',
+      notify = true,
+      icons = {
+        keys = {
+        }
+      }
     },
     keys = {
-      {
-        "<leader>?",
-        function()
-          require("which-key").show({ global = false })
-        end,
-        desc = "Buffer Local Keymaps (which-key)",
-      },
+      { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)", },
     },
   },
   {
@@ -60,5 +66,10 @@ return {
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     }
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = {}
   }
 }

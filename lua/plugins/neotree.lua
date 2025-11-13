@@ -19,6 +19,9 @@ return {
         }
       }
 
+    },
+    keys = {
+      { "<leader>e", "<Cmd>Neotree filesystem reveal right<CR>" }
     }
   }
 }
