@@ -83,10 +83,23 @@ return {
         ---@type blink.cmp.Config
         opts = {
             snippets = {preset = "luasnip"},
+            completion = {
+                documentation = {auto_show = true},
+                menu = {
+                    draw = {
+                        treesitter = {'lsp'},
+                        columns = {
+                            {"kind_icon", gap = 2},
+                            {'label', 'label_description', "kind", gap = 2}
+                        }
+                    }
+                }
+            },
             keymap = {
                 preset = "default",
                 ["<Enter>"] = {"select_and_accept", "fallback"}
             },
+            signature = {},
             sources = {
                 -- add lazydev to your completion providers
                 default = {"lazydev", "lsp", "path", "snippets"},
