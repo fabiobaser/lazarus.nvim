@@ -1,0 +1,57 @@
+snippet ex "export const"
+  export const
+
+snippet arrow "Arrow Function"
+  ($1): $2 => {
+    $0
+  } 
+
+snippet exArrFunc = "Export Arrow Function"
+  export const ${TM_FILENAME_BASE} = ($1) => {
+    $0
+  }
+  
+snippet egen "Effect Generator"
+  Effect.gen(function* () {
+    $0
+  })
+
+snippet efn "Effect Fn"
+  Effect.fn(function* ($1) {
+    $0
+  })
+
+snippet eservice "Effect Service Definition"
+  export class ${TM_FILENAME_BASE} extends Effect.Service<${TM_FILENAME_BASE}>()('${TM_FILENAME_BASE}', {
+      accessors: true,
+      effect: Effect.gen(function* () {
+          return {
+              $0
+          }
+      }),
+  }) {}
+
+snippet pip "Effect Pipe"
+  pipe($0)
+
+
+snippet schema "Effect Schema Struct"
+  import { Schema as S } from 'effect'
+  
+  export const ${TM_FILENAME_BASE} = S.Struct({
+      $0
+  }).annotations({
+      identifier: '${TM_FILENAME_BASE}',
+  })
+  export type ${TM_FILENAME_BASE} = S.Schema.Type<typeof ${TM_FILENAME_BASE}>
+
+snippet schema "Effect Schema Class"
+  import { Schema as S } from 'effect'
+  
+  export class ${TM_FILENAME_BASE} extends S.Class<${TM_FILENAME_BASE}>('${TM_FILENAME_BASE}')({
+      $0
+  }) {}
+
+snippet taggedError "Effect Tagged Error"
+  export class $1 extends Data.TaggedError('$1')<{$2}> {}
+

@@ -9,5 +9,6 @@ Snacks = Snacks
 require("config.options")
 require("config.lazy")
 require("config.keymaps")
+require("config.registers")
 
 vim.api.nvim_command("highlight SnacksIndent guifg=#493d64")

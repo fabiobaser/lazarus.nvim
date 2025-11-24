@@ -1,0 +1,35 @@
+extends typescript
+
+snippet props "React Prop Types"
+  export type ${TM_FILENAME_BASE}Props = {
+    className?: string
+    $0
+  }
+
+snippet uset "Tolgee useTranslate-Hook"
+  const {t} = useTranslate($0)
+
+snippet useNavigate "Router useNavigate-Hook"
+  const navigate = useNavigate($0)
+
+snippet useDispatch "Redux useAppDispatch-Hook"
+  const dispatch = useAppDispatch($0)
+
+
+snippet rf "React Functional Component with Props"
+  export const ${TM_FILENAME_BASE} = (props: ${TM_FILENAME_BASE}Props) => {
+      return (
+          $0
+      )
+  }
+
+snippet rfp "React Functional Component with Props"
+  export type ${TM_FILENAME_BASE}Props = {
+  
+  }
+  
+  export const ${TM_FILENAME_BASE} = (props: ${TM_FILENAME_BASE}Props) => {
+      return (
+          $0
+      )
+  }

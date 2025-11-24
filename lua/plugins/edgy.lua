@@ -1,6 +1,6 @@
 return {
 
-  {
+    --[[ {
     "folke/edgy.nvim",
     event = "VeryLazy",
     init = function()
@@ -55,5 +55,5 @@ return {
         },
       }
     }
-  }
+  } ]]
 }

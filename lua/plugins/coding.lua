@@ -13,7 +13,9 @@ return {
         event = "VeryLazy",
         priority = 10,
         opts = {}
-    }, {
+    },
+    {'windwp/nvim-autopairs', event = "InsertEnter", config = true, opts = {}},
+    {
         "folke/trouble.nvim",
         opts = {}, -- for default options, refer to the configuration section for custom setup.
         cmd = "Trouble",
@@ -62,7 +64,7 @@ return {
                 function() require("flash").jump() end,
                 desc = "Flash"
             }, {
-                "S",
+                "<M-s>",
                 mode = {"n", "x", "o"},
                 function() require("flash").treesitter() end,
                 desc = "Flash Treesitter"
@@ -95,5 +97,9 @@ return {
         opts = {},
         event = "VeryLazy",
         enabled = vim.fn.has("nvim-0.10.0") == 1
+    }, {"lewis6991/gitsigns.nvim", opts = {}}, {
+        "pmizio/typescript-tools.nvim",
+        dependencies = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"},
+        opts = {}
     }
 }

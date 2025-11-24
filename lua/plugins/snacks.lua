@@ -9,7 +9,8 @@ return {
             statuscolumn = {
                 left = {"mark", "sign"},
                 right = {"fold", "git"},
-                folds = {open = false}
+                folds = {open = false},
+                git = {patterns = {"GitSigns", "MiniDiffSign"}}
             },
             notifier = {sort = {"added"}},
             scroll = {debug = false},
@@ -53,6 +54,7 @@ return {
                     end
                 }
             },
+            words = {notify_jump = true, notify_end = true},
             indent = {
                 priority = 1,
                 enabled = true,
@@ -128,11 +130,15 @@ return {
                 function() Snacks.picker.recent({}) end,
                 desc = "Find recent"
             }, {
-                "<leader>cc",
+                "<leader>fh",
+                function() Snacks.picker.highlights() end,
+                desc = "Find Highlight Groups"
+            }, {
+                "<leader>c",
                 function() Snacks.bufdelete() end,
                 desc = "Closes current buffer"
             }, {
-                "<leader>ca",
+                "<leader>Ca",
                 function() Snacks.bufdelete.other() end,
                 desc = "Closes all other buffers"
             }, -- git
@@ -167,6 +173,14 @@ return {
                 "<leader>Nl",
                 function() Snacks.picker.lazy() end,
                 desc = "Search for Neovim Plugin"
+            }, {
+                "[[",
+                function() Snacks.words.jump(-1, true) end,
+                desc = "Jump to prev LSP Word"
+            }, {
+                "]]",
+                function() Snacks.words.jump(1, true) end,
+                desc = "Jump to next LSP Word"
             }
         }
     }

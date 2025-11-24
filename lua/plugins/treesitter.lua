@@ -1,34 +1,17 @@
 return {
-  { "fei6409/log-highlight.nvim", event = "BufRead *.log", opts = {} },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "caddy",
-        "cmake",
-	"typescript",
-        -- "comment", -- comments are slowing down TS bigtime, so disable for now
-        "css",
-        "devicetree",
-        "gitcommit",
-        "gitignore",
-        "glsl",
-        "go",
-        "graphql",
-        "http",
-        "just",
-        "kconfig",
-        "meson",
-        "ninja",
-        "nix",
-        -- "org",
-        "php",
-        "scss",
-        "sql",
-        "svelte",
-        "vue",
-        "wgsl",
-      },
-    },
-  },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        main = "nvim-treesitter.configs",
+        ---@module "nvim-treesitter"
+        opts = {
+            highlight = {enable = true},
+            folds = {enable = true},
+            ensure_installed = {
+                "typescript", "javascript", "tsx",
+                -- "comment", -- comments are slowing down TS bigtime, so disable for now
+                "css", "gitcommit", "gitignore", "graphql", "http", "nix",
+                "scss"
+            }
+        }
+    }, {"fei6409/log-highlight.nvim", event = "BufRead *.log", opts = {}}
 }
