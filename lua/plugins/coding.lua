@@ -97,9 +97,15 @@ return {
         opts = {},
         event = "VeryLazy",
         enabled = vim.fn.has("nvim-0.10.0") == 1
-    }, {"lewis6991/gitsigns.nvim", opts = {}}, {
+    }, {"lewis6991/gitsigns.nvim", opts = {}}
+}
+
+--[[ 
+--{
         "pmizio/typescript-tools.nvim",
         dependencies = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"},
         opts = {}
-    }
+    
 }
+--]]
+

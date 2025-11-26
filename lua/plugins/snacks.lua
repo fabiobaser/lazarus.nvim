@@ -24,6 +24,7 @@ return {
             picker = {
                 previewers = {diff = {builtin = false}, git = {builtin = false}},
                 sources = {
+                    custom_picker = {},
                     files = {hidden = true},
                     grep = {hidden = true},
                     select = {
@@ -129,10 +130,11 @@ return {
                 "<leader>fe",
                 function() Snacks.picker.recent({}) end,
                 desc = "Find recent"
-            }, {
-                "<leader>fh",
-                function() Snacks.picker.highlights() end,
-                desc = "Find Highlight Groups"
+            },
+            {
+                "<leader>fp",
+                function() Snacks.picker.pickers() end,
+                desc = "Find Picker"
             }, {
                 "<leader>c",
                 function() Snacks.bufdelete() end,
