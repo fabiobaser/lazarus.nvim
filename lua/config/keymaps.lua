@@ -36,3 +36,140 @@ Snacks.keymap.set("n", "<leader>S.",
                   function() require('persistence').load() end)
 Snacks.keymap.set("n", "<leader>Sl",
                   function() require('persistence').load({last = true}) end)
+
+Snacks.keymap.set("n", "<leader>ns", function()
+
+    local on_confirm = function(value)
+        if value == nil then return end
+
+        vim.cmd(
+            "edit ~/Developer/collector-frontend/packages/api/src/schemas/" ..
+                value .. ".ts")
+    end
+
+    Snacks.input
+        .input({prompt = "Schema Name", completion = "moin"}, on_confirm)
+end, {desc = "Create a new Schema File"})
+
+local custom_picker = function()
+    Snacks.picker.pick({
+        prompt = "Generator Name ",
+        finder = function()
+            return {
+                {idx = 1, text = "Schema", icon = "", fabio = "1"},
+                {idx = 2, text = "hi", icon = "", fabio = "2"}
+            }
+        end,
+        format = function(item, _)
+            local file = item.text
+            local ret = {}
+            local a = Snacks.picker.util.align
+            ret[#ret + 1] = {a(item.icon, 3)}
+            ret[#ret + 1] = {" "}
+            ret[#ret + 1] = {a(file, 20)}
+
+            return ret
+        end,
+        layout = {
+            layout = {
+                preview = false,
+                box = "horizontal",
+                width = 0.5,
+                height = 0.5,
+                {
+                    box = "vertical",
+                    border = "rounded",
+                    title = "Find directory",
+                    {win = "input", height = 1, border = "bottom"},
+                    {win = "list", border = "none"}
+                }
+            }
+        },
+        confirm = function(picker, item)
+            picker:close()
+            Snacks.input.input({prompt = "Name"}, print)
+        end
+    })
+end
+
+Snacks.keymap.set("n", "<leader>nn", function() custom_picker() end)
+
+local special_finder_picker = function()
+    Snacks.picker.pick({
+        prompt = "Find ",
+        finder = function()
+            return {
+                {
+                    idx = 1,
+                    text = "in Modules",
+                    icon = "",
+                    onSelect = function()
+                        Snacks.picker.files({
+                            cwd = "~/Developer/collector-frontend/apps/web/src/modules/"
+                        })
+                    end
+                }, {
+                    idx = 2,
+                    text = "API Schema",
+                    icon = "",
+                    onSelect = function()
+                        Snacks.picker.files({
+                            cwd = "~/Developer/collector-frontend/packages/api/src/schemas/"
+                        })
+                    end
+                }, {
+                    idx = 3,
+                    text = "API Contract",
+                    icon = "",
+                    onSelect = function()
+                        Snacks.picker.files({
+                            cwd = "~/Developer/collector-frontend/packages/api/src/contracts/"
+                        })
+                    end
+                }, {
+                    idx = 4,
+                    text = "API Service",
+                    icon = "",
+                    onSelect = function()
+                        Snacks.picker.files({
+                            cwd = "~/Developer/collector-frontend/apps/web/src/features/api/services/"
+                        })
+                    end
+                }
+
+            }
+        end,
+        format = function(item, _)
+            local file = item.text
+            local ret = {}
+            local a = Snacks.picker.util.align
+            ret[#ret + 1] = {a(item.icon, 3)}
+            ret[#ret + 1] = {" "}
+            ret[#ret + 1] = {a(file, 20)}
+
+            return ret
+        end,
+        layout = {
+            layout = {
+                preview = false,
+                box = "horizontal",
+                width = 0.5,
+                height = 0.5,
+                {
+                    box = "vertical",
+                    border = "rounded",
+                    title = "Find directory",
+                    {win = "input", height = 1, border = "bottom"},
+                    {win = "list", border = "none"}
+                }
+            }
+        },
+        confirm = function(picker, item)
+            picker:close()
+            item.onSelect()
+        end
+    })
+end
+
+Snacks.keymap.set("n", "<leader>FF", special_finder_picker,
+                  {desc = "Opens Special Finder Picker"})
