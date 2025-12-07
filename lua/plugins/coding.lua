@@ -85,10 +85,9 @@ return {
                 desc = "Toggle Flash Search"
             }
         }
-    },
-    -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
-    {
+    }, {
         'numToStr/Comment.nvim',
+        enabled = false,
         opts = {
             -- add any options here
         }
@@ -97,7 +96,13 @@ return {
         opts = {},
         event = "VeryLazy",
         enabled = vim.fn.has("nvim-0.10.0") == 1
-    }, {"lewis6991/gitsigns.nvim", opts = {}}
+    }, {'folke/todo-comments.nvim', opts = {}},
+    {"lewis6991/gitsigns.nvim", opts = {}}, {
+        "danymat/neogen",
+        config = true
+        -- Uncomment next line if you want to follow only stable versions
+        -- version = "*" 
+    }
 }
 
 --[[ 

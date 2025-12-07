@@ -33,14 +33,7 @@ return {
                             sidekick_prompt = {layout = {preset = "vscode"}}
                         }
                     },
-                    explorer = {
-                        auto_close = true,
-                        hidden = false,
-                        layout = {
-                            preset = "sidebar",
-                            preview = {main = true, enabled = false}
-                        }
-                    }
+                    explorer = {auto_close = true, hidden = false}
                 },
                 win = {
                     input = {
@@ -105,6 +98,11 @@ return {
                 "<leader><space>",
                 function() Snacks.picker.smart() end,
                 desc = "Smart Open"
+            },
+            {
+                "<leader>e",
+                function() Snacks.picker.explorer() end,
+                desc = "Open Explorer"
             },
             -- { "<leader>e",       function() Snacks.explorer.open() end,          desc = "Open Explorer" },
             {

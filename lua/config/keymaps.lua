@@ -19,8 +19,13 @@ Snacks.keymap.set("n", "<leader>h", ":nohl<cr>", {desc = "Quit All"})
 Snacks.keymap.set("t", "<Esc>", "<C-\\><C-n>",
                   {desc = "Exit Insert Mode (Terminal)"})
 
-Snacks.keymap.set("n", "<leader>Ni", "<Cmd>Inspect<cr>",
+Snacks.keymap.set("n", "<leader>Nii", "<Cmd>Inspect<cr>",
                   {desc = "[N]eovoim [I]nspect"})
+Snacks.keymap.set("i", "<C-k>", function()
+    local cmp = require('blink.cmp')
+    local item = cmp.get_selected_item and cmp.get_selected_item()
+    print(vim.inspect(item))
+end, {desc = "Inspect Blink"})
 
 Snacks.keymap.set("n", "<C-h>", "<C-w>h")
 Snacks.keymap.set("n", "<C-j>", "<C-w>j")
@@ -173,3 +178,51 @@ end
 
 Snacks.keymap.set("n", "<leader>FF", special_finder_picker,
                   {desc = "Opens Special Finder Picker"})
+
+Snacks.keymap.set("n", "<leader>EE", function()
+
+    Snacks.picker.pick({
+        prompt = "Find ",
+        finder = function()
+            return {
+                {
+                    idx = 1,
+                    text = "Routes",
+                    onSelect = function()
+                        Snacks.explorer({
+                            cwd = "~/Developer/collector-frontend/apps/web/src/routes/"
+                        })
+                    end
+                }
+            }
+        end,
+        format = function(item, _)
+            local file = item.text
+            local ret = {}
+            local a = Snacks.picker.util.align
+            ret[#ret + 1] = {" "}
+            ret[#ret + 1] = {a(file, 20)}
+
+            return ret
+        end,
+        layout = {
+            layout = {
+                preview = false,
+                box = "horizontal",
+                width = 0.5,
+                height = 0.5,
+                {
+                    box = "vertical",
+                    border = "rounded",
+                    title = "Find directory",
+                    {win = "input", height = 1, border = "bottom"},
+                    {win = "list", border = "none"}
+                }
+            }
+        },
+        confirm = function(picker, item)
+            picker:close()
+            item.onSelect()
+        end
+    })
+end, {desc = "Opens Scoped Explorers"})

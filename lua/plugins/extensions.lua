@@ -10,5 +10,5 @@ return {
         opts = {
             -- options
         }
-    }
+    }, {'jbyuki/quickmath.nvim'}
 }

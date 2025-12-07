@@ -6,11 +6,50 @@
 -- \_____/\____/\_|    
 return {
     {
+        "neovim/nvim-lspconfig",
+        config = function()
+
+            vim.lsp.config['vtsls'] = {
+                workspace_required = true,
+                root_markers = {'tsconfig.json', 'package.json'}
+            }
+
+            vim.lsp.config['tailwindcss'] = {
+                settings = {
+                    tailwindCSS = {
+                        emmetCompletions = true,
+                        classFunctions = {"tv", "cva", "clsx"},
+                        classAttributes = {
+                            "class", "className", "class:list", "classList",
+                            "ngClass"
+                        },
+                        includeLanguages = {
+                            eelixir = "html-eex",
+                            elixir = "phoenix-heex",
+                            eruby = "erb",
+                            heex = "phoenix-heex",
+                            htmlangular = "html",
+                            templ = "html"
+                        },
+                        lint = {
+                            cssConflict = "warning",
+                            invalidApply = "error",
+                            invalidConfigPath = "error",
+                            invalidScreen = "error",
+                            invalidTailwindDirective = "error",
+                            invalidVariant = "error",
+                            recommendedVariantOrder = "warning"
+                        },
+                        validate = true
+                    }
+                }
+            }
+
+        end
+    }, {
         "mason-org/mason-lspconfig.nvim",
         opts = {},
-        dependencies = {
-            "neovim/nvim-lspconfig", {"mason-org/mason.nvim", opts = {}}
-        }
+        dependencies = {{"mason-org/mason.nvim", opts = {}}}
     }, {
         "nvimdev/lspsaga.nvim",
         ---@module 'lspsaga'
@@ -66,6 +105,7 @@ return {
     }, {
         'L3MON4D3/LuaSnip',
         version = "v2.*",
+        build = "make install_jsregexp",
         config = function()
             require("luasnip.loaders.from_vscode").lazy_load({
                 paths = "~/.config/nvim/lua/snippets"
@@ -78,7 +118,6 @@ return {
     { -- optional blink completion source for require statements and module annotations
         "saghen/blink.cmp",
         version = "1.*",
-        dependencies = {'L3MON4D3/LuaSnip', version = "v2.*"},
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
@@ -112,6 +151,10 @@ return {
                     }
                 }
             }
+        },
+        keys = {
+            {'<C-k>', function() require('blink.cmp').show() end, mode = 'i'}
         }
-    }, {"ThePrimeagen/refactoring.nvim", opts = {}}
+    }, {"ThePrimeagen/refactoring.nvim", opts = {}},
+    {"vuki656/package-info.nvim", opts = {}}
 }

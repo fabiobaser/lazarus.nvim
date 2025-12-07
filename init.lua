@@ -2,6 +2,8 @@ if vim.env.VSCODE then vim.g.vscode = true end
 
 if vim.loader then vim.loader.enable() end
 
+function _G.Capitalize(str) return (str:gsub("^%1", string.upper)) end
+
 ---@module 'snacks'
 ---@type Snacks
 Snacks = Snacks
