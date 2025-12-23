@@ -14,6 +14,29 @@ return {
                 root_markers = {'tsconfig.json', 'package.json'}
             }
 
+            vim.lsp.config['jsonls'] = {
+                settings = {
+                    json = {
+                        schemas = {
+                            {
+                                fileMatch = {"package.json"},
+                                url = "https://json.schemastore.org/package.json"
+                            }, {
+                                fileMatch = {"tsconfig.json", "tsconfig.*.json"},
+                                url = "https://json.schemastore.org/tsconfig"
+                            },
+                            {
+                                fileMatch = {"turbo.json"},
+                                url = "https://turborepo.com/schema.json"
+                            }, {
+                                fileMatch = {'biome.json', "biome.jsonc"},
+                                url = "https://biomejs.dev/schemas/latest/schema.json"
+                            }
+                        }
+                    }
+                }
+            }
+
             vim.lsp.config['tailwindcss'] = {
                 settings = {
                     tailwindCSS = {
@@ -80,7 +103,8 @@ return {
                 javascript = {"biome", "biome-organize-imports"},
                 javascriptreact = {"biome", "biome-organize-imports"},
                 typescript = {"biomeFix"},
-                typescriptreact = {"biomeFix"}
+                typescriptreact = {"biomeFix"},
+                json = {"biomeFix"}
             },
             formatters = {
                 biomeFix = {
@@ -117,6 +141,7 @@ return {
     },
     { -- optional blink completion source for require statements and module annotations
         "saghen/blink.cmp",
+        event = "BufReadPre",
         version = "1.*",
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config

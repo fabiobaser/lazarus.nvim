@@ -96,21 +96,55 @@ return {
         opts = {},
         event = "VeryLazy",
         enabled = vim.fn.has("nvim-0.10.0") == 1
-    }, {'folke/todo-comments.nvim', opts = {}},
-    {"lewis6991/gitsigns.nvim", opts = {}}, {
-        "danymat/neogen",
-        config = true
-        -- Uncomment next line if you want to follow only stable versions
-        -- version = "*" 
+    }, {'folke/todo-comments.nvim', opts = {}}, {
+        "lewis6991/gitsigns.nvim",
+        event = "BufEnter",
+        opts = {},
+        keys = {
+            {
+                '<leader>ghs',
+                function() require('gitsigns').stage_hunk() end,
+                desc = 'Stage Hunk'
+            }, {
+                '<leader>ghp',
+                function() require('gitsigns').preview_hunk() end,
+                desc = "Preview Hunk"
+            }, {
+                '<leader>ghP',
+                function()
+                    require('gitsigns').preview_hunk_inline()
+                end,
+                desc = "Preview Hunk Inline"
+            }, {
+                '<leader>ghr',
+                function() require('gitsigns').reset_hunk() end,
+                desc = "Reset Hunk"
+            }
+        }
+    }, {"danymat/neogen", config = true}, {
+        'nvim-pack/nvim-spectre',
+        opts = {},
+        keys = {
+            {"<leader>mr", function()
+                require('spectre').open_file_search()
+            end}, {"<leader>mR", function()
+                require('spectre').toggle()
+            end}
+        }
+    }, {
+        "HiPhish/rainbow-delimiters.nvim",
+        config = function()
+            require('rainbow-delimiters.setup').setup {
+                query = {tsx = "rainbow-parens"}
+            }
+        end
+    }, {
+        "gbprod/yanky.nvim",
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        }
     }
 }
-
---[[ 
---{
-        "pmizio/typescript-tools.nvim",
-        dependencies = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"},
-        opts = {}
-    
-}
---]]
 

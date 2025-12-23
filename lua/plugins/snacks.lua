@@ -159,6 +159,23 @@ return {
             }, {
                 "<leader>T",
                 function()
+
+                    local clients = vim.lsp.get_clients({name = "vtsls"})
+
+                    local root_dir = clients[1].config.root_dir
+
+                    Snacks.scratch({
+                        icon = " ",
+                        name = "Todo",
+                        ft = "markdown",
+                        file = root_dir .. "/TODO.md"
+                    })
+
+                end,
+                desc = "Neovim Todo List"
+            }, {
+                "<leader>NT",
+                function()
                     local file = vim.uv.fs_stat("TODO.md") and "TODO.md" or
                                      "~/.config/nvim/TODO.md"
                     Snacks.scratch({
@@ -168,7 +185,7 @@ return {
                         file = file
                     })
                 end,
-                desc = "Todo List"
+                desc = "Neovim Todo List"
             }, {
                 "<leader>Nl",
                 function() Snacks.picker.lazy() end,

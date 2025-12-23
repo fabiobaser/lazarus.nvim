@@ -77,3 +77,27 @@ snippet simpleReducer "Simple Reducer"
   $1: (state, action: PayloadAction<$2>) => ({
     $0
   }),
+
+
+snippet testSuite "Complete Vitest Testfile"
+  import { describe, expect, it } from 'vitest'
+
+  describe('$TM_FILENAME_BASE', () => {
+    it('$0', () => {
+      expect(true).toBeTruthy()
+    })
+  })
+
+snippet describe "Test Suite"
+  describe('$TM_FILENAME_BASE', () => {
+    it('$0', () => {
+      expect(true).toBeTruthy()
+    })
+  })
+
+
+snippet it "Test Case"
+  it('$1', () => {
+    $0
+    expect(true).toBeTruthy()
+  })
